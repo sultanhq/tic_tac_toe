@@ -47,11 +47,11 @@ describe 'board' do
     let(:player_X) { double('player_X', marker: 'X') }
     let(:player_0) { double('player_0', marker: '0') }
 
-    it 'game over if all of the board is full' do
+    it 'game over if all of the board is full and no-one wins' do
       setup_loosing_game
       message = 'Game Over'
 
-      expect { @board.place_marker(player_X.marker, 8) }.to raise_error message
+      expect { @board.place_marker(player_0.marker, 8) }.to raise_error message
     end
   end
 end
