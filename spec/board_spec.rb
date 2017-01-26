@@ -34,4 +34,13 @@ describe 'board' do
     end
   end
 
+  describe 'game over' do
+    let(:player_X) { double('player_X', marker: 'X') }
+    it 'game over if all of the board is full' do
+      @board.grid.each_with_index do |_cell, i|
+        @board.place_marker(player_X.marker, i)
+      end
+      expect(@board.check_for_game_over?).to eq true
+    end
+  end
 end

@@ -18,4 +18,8 @@ class Board
   def check_for_empty_cell?(cell)
     @grid[cell].nil?
   end
+
+  def check_for_game_over?
+    (@grid - [nil]).length >= 9
+  end
 end
