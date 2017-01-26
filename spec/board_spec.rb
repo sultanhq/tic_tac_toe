@@ -32,15 +32,25 @@ describe 'board' do
       @board.place_marker(player_X.marker, 5)
       expect(@board.grid[5]).to eq 'X'
     end
+
+    it 'a player can win by placing X in cells 0,4,8 (diagonal)' do
+      @board.place_marker(player_X.marker, 0)
+      @board.place_marker(player_X.marker, 4)
+      message = 'Game Over'
+      expect { @board.place_marker(player_X.marker, 8) }.to raise_error message
+
+    end
+
   end
 
   describe 'game over' do
     let(:player_X) { double('player_X', marker: 'X') }
+    let(:player_0) { double('player_0', marker: '0') }
+
     it 'game over if all of the board is full' do
-      8.times do |i|
-        @board.place_marker(player_X.marker, i)
-      end
+      setup_loosing_game
       message = 'Game Over'
+
       expect { @board.place_marker(player_X.marker, 8) }.to raise_error message
     end
   end
