@@ -13,7 +13,10 @@ class Board
     else
       raise 'marker already placed in that cell'
     end
+    raise 'Game Over' if check_for_game_over?
   end
+
+  private
 
   def check_for_empty_cell?(cell)
     @grid[cell].nil?
