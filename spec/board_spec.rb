@@ -22,6 +22,6 @@ describe 'board' do
   it 'expects a board not to accept an X in a cell if already populated' do
     @board.place_marker('X', 2, 2)
     message = 'marker already placed in that cell'
-    expect{ @board.place_marker('X', 2, 2) }.to raise_error(message)
+    expect { @board.place_marker('X', 2, 2) }.to raise_error(message)
   end
 end

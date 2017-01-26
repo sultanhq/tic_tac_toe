@@ -7,11 +7,11 @@ class Board
 
   attr_reader :grid
 
-  def place_marker(marker,row,column)
-    if check_for_empty_cell?(row,column)
+  def place_marker(marker, row, column)
+    if check_for_empty_cell?(row, column)
       @grid[row][column] = marker
     else
-      raise "marker already placed in that cell"
+      raise 'marker already placed in that cell'
     end
   end
 
