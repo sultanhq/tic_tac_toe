@@ -6,6 +6,9 @@ class Board
 
   def initialize
     @grid = Array.new(SIZE)
+    @players = %w(X 0)
+    @arr = []
+    @winner = false
   end
 
   attr_reader :grid
@@ -16,7 +19,7 @@ class Board
     else
       raise 'marker already placed in that cell'
     end
-    raise 'Game Over' if check_for_game_over?
+    check_for_game_over(marker)
   end
 
   private
@@ -25,8 +28,9 @@ class Board
     @grid[cell].nil?
   end
 
-  def check_for_game_over?
-    check_if_player_wins? || check_if_grid_full?
+  def check_for_game_over(marker)
+    raise "Player #{marker} wins" if check_if_player_wins?
+    raise 'Game Over' if check_if_grid_full?
   end
 
   def check_if_grid_full?
@@ -34,13 +38,15 @@ class Board
   end
 
   def check_if_player_wins?
-    players = %w(X 0)
-    win = []
-    players.each do |letter|
+    @players.each do |letter|
       @grid.each_with_index.select do |val, index|
-        win.push(index) if val == letter
+        @arr.push(index) if val == letter
       end
+      @arr.permutation(3).each do |permute|
+        @winner = true if WINS.include?(permute)
+      end
+      @arr = []
     end
-    WINS.include?(win)
+    @winner
   end
 end

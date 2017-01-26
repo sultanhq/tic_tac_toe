@@ -36,7 +36,7 @@ describe 'board' do
     it 'a player can win by placing X in cells 0,4,8 (diagonal)' do
       @board.place_marker(player_X.marker, 0)
       @board.place_marker(player_X.marker, 4)
-      message = 'Game Over'
+      message = 'Player X wins'
       expect { @board.place_marker(player_X.marker, 8) }.to raise_error message
 
     end
