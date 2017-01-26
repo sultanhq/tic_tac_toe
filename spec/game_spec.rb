@@ -15,7 +15,6 @@ describe 'game' do
   describe 'turns' do
     let(:player_X) { double('player_X') }
     let(:player_0) { double('player_0') }
-    let(:board) { double('board', :place_marker= => nil) }
 
     before(:each) do
       @game = Game.new(player_X, player_0, board)
@@ -30,6 +29,6 @@ describe 'game' do
       expect(@game.turn).to eq(player_0)
     end
 
-    
+
   end
 end
