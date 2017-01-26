@@ -24,4 +24,14 @@ describe 'board' do
     message = 'marker already placed in that cell'
     expect { @board.place_marker('X', 5) }.to raise_error(message)
   end
+
+  describe 'player tests' do
+    let(:player_X) { double('player_X', marker: 'X') }
+
+    it 'a player can place a marker on a board' do
+      @board.place_marker(player_X.marker, 5)
+      expect(@board.grid[5]).to eq 'X'
+    end
+  end
+
 end
