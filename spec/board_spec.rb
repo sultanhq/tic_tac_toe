@@ -2,10 +2,21 @@ require 'spec_helper'
 require 'board'
 
 describe 'board' do
-
+  before(:each) do
+    @board = Board.new
+  end
   it "expects a board to be instatiated with 3 'rows'" do
-    board = Board.new
-    expect(board.rows.length).to eq 3
+    expect(@board.grid.length).to eq 3
   end
 
+  it 'expects a board to accept an X in one of its cells' do
+    @board.place_marker("X",2,2)
+    expect(@board.grid[2][2]).to eq 'X'
+  end
+
+  it 'expects a board not to accept an X in one of its cells if already populated' do
+    @board.place_marker("X",2,2)
+    message = "marker already placed in that cell"
+    expect{@board.place_marker("X",2,2)}.to raise_error(message)
+  end
 end
