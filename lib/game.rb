@@ -6,6 +6,7 @@ class Game
     @players = [player_X, player_0]
     @board = board
     @turn = nil
+    choose_starting_player
   end
 
   attr_reader :players, :turn
