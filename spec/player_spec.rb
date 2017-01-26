@@ -10,8 +10,4 @@ describe 'player' do
     expect(@playerX).to be_an_instance_of(Player)
   end
 
-  xit 'a player can place a marker on a board' do
-    @playerX.place_marker(2,2)
-    expect
-  end
 end
