@@ -26,32 +26,32 @@ describe 'board' do
   end
 
   describe 'player tests' do
-    let(:player_X) { double('player_X', marker: 'X') }
+    let(:player_1) { double('player_1', marker: 'X') }
 
     it 'a player can place a marker on a board' do
-      @board.place_marker(player_X.marker, 5)
+      @board.place_marker(player_1.marker, 5)
       expect(@board.grid[5]).to eq 'X'
     end
 
-    it 'a player can win by placing X in cells 0,4,8 (diagonal)' do
-      @board.place_marker(player_X.marker, 0)
-      @board.place_marker(player_X.marker, 4)
+    it 'player 1 can win by placing X in cells 0,4,8 (diagonal)' do
+      @board.place_marker(player_1.marker, 0)
+      @board.place_marker(player_1.marker, 4)
       message = 'Player X wins'
-      expect { @board.place_marker(player_X.marker, 8) }.to raise_error message
+      expect { @board.place_marker(player_1.marker, 8) }.to raise_error message
 
     end
 
   end
 
   describe 'game over' do
-    let(:player_X) { double('player_X', marker: 'X') }
-    let(:player_0) { double('player_0', marker: '0') }
+    let(:player_1) { double('player_1', marker: 'X') }
+    let(:player_2) { double('player_2', marker: '0') }
 
     it 'game over if all of the board is full and no-one wins' do
       setup_loosing_game
       message = 'Game Over'
 
-      expect { @board.place_marker(player_0.marker, 8) }.to raise_error message
+      expect { @board.place_marker(player_2.marker, 8) }.to raise_error message
     end
   end
 end

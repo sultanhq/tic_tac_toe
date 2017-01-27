@@ -1,21 +1,21 @@
-class Game
-  require_relative 'board'
-  require_relative 'player'
+require_relative 'board'
+require_relative 'player'
 
-  def initialize(player_X, player_0, board)
-    @players = [player_X, player_0]
+class Game
+  def initialize(board, player_1, player_2)
+    @players = [player_1, player_2]
     @board = board
-    @turn = nil
+    @current_player = nil
     choose_starting_player
   end
 
-  attr_reader :players, :turn
+  attr_reader :players, :current_player
 
   def choose_starting_player
-    @turn = @players.rotate!(rand(2)).first
+    @current_player = @players.rotate!(rand(2)).first
   end
 
   def next_turn
-    @turn = @players.rotate!.first
+    @current_player = @players.rotate!.first
   end
 end

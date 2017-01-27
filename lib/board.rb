@@ -2,19 +2,17 @@ class Board
   WINS = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
           [0, 3, 6], [1, 4, 7], [2, 5, 8],
           [0, 4, 8], [2, 4, 5]].freeze
-  SIZE = 9
+  GRID_SIZE = 9
 
   def initialize
-    @grid = Array.new(SIZE)
+    @grid = Array.new(GRID_SIZE)
     @players = %w(X 0)
-    @arr = []
-    @winner = false
   end
 
   attr_reader :grid
 
   def place_marker(marker, cell)
-    if check_for_empty_cell?(cell)
+    if empty_cell?(cell)
       @grid[cell] = marker
     else
       raise 'marker already placed in that cell'
@@ -24,12 +22,12 @@ class Board
 
   private
 
-  def check_for_empty_cell?(cell)
+  def empty_cell?(cell)
     @grid[cell].nil?
   end
 
   def check_for_game_over(marker)
-    raise "Player #{marker} wins" if check_if_player_wins?
+    raise "Player #{marker} wins" if check_if_player_wins?(marker)
     raise 'Game Over' if check_if_grid_full?
   end
 
@@ -37,16 +35,9 @@ class Board
     (@grid - [nil]).length >= 9
   end
 
-  def check_if_player_wins?
-    @players.each do |letter|
-      @grid.each_with_index.select do |val, index|
-        @arr.push(index) if val == letter
-      end
-      @arr.permutation(3).each do |permute|
-        @winner = true if WINS.include?(permute)
-      end
-      @arr = []
+  def check_if_player_wins?(marker)
+    WINS.any? do |win|
+      win.all? { |i| @grid[i] == marker }
     end
-    @winner
   end
 end
